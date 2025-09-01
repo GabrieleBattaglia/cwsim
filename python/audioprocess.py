@@ -154,7 +154,7 @@ class agc():
       self._valbuf = np.zeros(self._valbufsize,dtype=np.float32)
       self._ind = np.add.outer(
          agcbufsize*np.arange(self._magbufsize-agcbufsize+1),
-         (agcbufsize+1)*np.arange(agcbufsize)).astype(np.integer)
+         (agcbufsize+1)*np.arange(agcbufsize)).astype(int)
 
    def process(self,buf):
       """
