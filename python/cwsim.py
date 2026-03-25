@@ -136,6 +136,7 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
       self.activitySpinBox.valueChanged.connect(self.activity)
       self.durationComboBox.currentIndexChanged.connect(self.modecombo)
       self.contestComboBox.currentIndexChanged.connect(self.modecombo)
+      self.typeComboBox.currentIndexChanged.connect(self.typecombo)
       self.trF1Button.clicked.connect(self.f1)
       self.trF2Button.clicked.connect(self.f2)
       self.trF3Button.clicked.connect(self.f3)
@@ -259,6 +260,7 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
       self.flutterProbSpinBox.setValue(self.contest.flutterProb)
       self.fastSpinBox.setValue(self.contest.fast)
       self.slowSpinBox.setValue(self.contest.slow)
+      self.typeComboBox.setCurrentIndex(1 if getattr(self.contest, 'isDxExpedition', False) else 0)
       if self.contest.mode == RunMode.pileup:
          self.contestComboBox.setCurrentIndex(0)
          self.durationComboBox.setCurrentIndex(0)
@@ -685,6 +687,9 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
    def lids(self,s):
       self.contest.lids = (s // 2)
 
+   def typecombo(self,s):
+      self.contest.isDxExpedition = (s == 1)
+
    def modecombo(self,s):
       i = self.contestComboBox.currentIndex()
       j = self.durationComboBox.currentIndex()
@@ -948,23 +953,31 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
 
    def checkQso(self):
       if self._lastLog[0] != self._lastQso[0]: return "NIL"
-      if self._lastLog[1] != self._lastQso[1]: return "NR"
-      if self._lastLog[2] != self._lastQso[2]: return "RST"
+      if getattr(self.contest, 'isDxExpedition', False):
+         if self._lastLog[2] != self._lastQso[2]: return "RST"
+      else:
+         if self._lastLog[1] != self._lastQso[1]: return "NR"
+         if self._lastLog[2] != self._lastQso[2]: return "RST"
       return ""
       
 
    def saveQso(self):
       time.sleep(0) #yield
       #check needed if period or equivalent typed before QSO info set up
-      if not (self._hiscall and self._nr and self._rst):
-         return
+      dx_exp = getattr(self.contest, 'isDxExpedition', False)
+      if dx_exp:
+         if not (self._hiscall and self._rst):
+            return
+      else:
+         if not (self._hiscall and self._nr and self._rst):
+            return
       self._nrsent = False
       self._callsent = False
       self._rawQsoCount += 1
       h,m,s = self.contest.time()
       if self._rst == "":
          self._rst = "599"
-      self._lastLog = [self._hiscall, int(self._nr), int(self._rst)]
+      self._lastLog = [self._hiscall, int(self._nr) if self._nr else 0, int(self._rst)]
       time.sleep(0) #yield
       rawPfx = self.prefix.getPrefix(self._hiscall)
       time.sleep(0) #yield
@@ -992,8 +1005,12 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
          self._lastLog = [None,None,None]
          self._lastQso = [None,None,None]
       tstr = '{:02d}:{:02d}:{:02d}'.format(h,m,s)
-      rcvd = '{:03d} {:04d}'.format(int(self._rst),int(self._nr))
-      sent = '{:03d} {:04d}'.format(599,self.contest.me.nr)
+      if dx_exp:
+         rcvd = '{:03d}'.format(int(self._rst))
+         sent = '{:03d}'.format(599)
+      else:
+         rcvd = '{:03d} {:04d}'.format(int(self._rst),int(self._nr))
+         sent = '{:03d} {:04d}'.format(599,self.contest.me.nr)
       time.sleep(0) #yield
       r = self.logTable.rowCount()
       time.sleep(0) #yield

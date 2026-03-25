@@ -284,10 +284,10 @@ class Contest():
                flutterProb=self.flutterProb,
                rptProb=self.rptProb,fast=self.fast,slow=self.slow,
                straightKeyProb=self.straightKeyProb,
-               isSingle=True,bufsize=self._bufsize,rate=self._rate)
+               isSingle=True,isDxExpedition=self.isDxExpedition,bufsize=self._bufsize,rate=self._rate)
             self.stations.append(s)
             s.processEvent(StationEvent.MeFinished)
-         
+
 #      np.savetxt(self.ef,audio)
 #      self.wf.writeframesraw((audio*30000).astype(np.int16))
 
@@ -329,7 +329,7 @@ class Contest():
                   lidRstProb=self.lidRstProb,qsb=self.qsb,
                   flutterProb=self.flutterProb,
                   rptProb=self.rptProb,fast=self.fast,slow=self.slow,
-                  isSingle=False,bufsize=self._bufsize,rate=self._rate))
+                  isSingle=False,isDxExpedition=self.isDxExpedition,bufsize=self._bufsize,rate=self._rate))
       for s in self.stations:
          s.processEvent(StationEvent.MeFinished)
 
@@ -413,6 +413,7 @@ class Contest():
       self.savewave = int(contestdict['savewave'])
       self.saveini = int(contestdict['saveini'])
       self.savesummary = int(contestdict['savesummary'])
+      self.isDxExpedition = contestdict.get('isdxexpedition', 'False') == 'True'
 
    def writeConfig(self,filename):
       with open(filename,'w') as f:
@@ -432,6 +433,6 @@ class Contest():
             ,'lidRstProb','lidNrProb','rptProb','flutterProb']:
             p.set('Conditions',i,str(eval('self.'+i)))
          p.add_section('Contest')
-         for i in ['duration','mode','savewave','saveini','savesummary']:
+         for i in ['duration','mode','savewave','saveini','savesummary','isDxExpedition']:
             p.set('Contest',i,str(eval('self.'+i)))
          p.write(f)

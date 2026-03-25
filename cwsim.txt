@@ -1,0 +1,53 @@
+
+IZ4APU Report cwsim 25/03/2026 14:12:23
+Durata 00:02:26
+Durata (QSO) 4
+Velocità CW 26 WPM
+Condizioni Difficoltà 
+Attività 8
+Durata 10
+Punti totali 4
+Prefissi totali 4
+Punteggio totale 16
+Punti verificati 4
+Prefissi verificati 4
+Punteggio verificato 16
+Percentuale d'errore 0.0
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   48
+5-9   0
+
+IZ4APU Report cwsim 25/03/2026 14:45:11
+Durata 00:00:52
+Durata (QSO) 1
+Velocità CW 28 WPM
+Condizioni Difficoltà 
+Attività 8
+Durata 10
+Punti totali 1
+Prefissi totali 1
+Punteggio totale 1
+Punti verificati 1
+Prefissi verificati 1
+Punteggio verificato 1
+Percentuale d'errore 0.0
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   12
+5-9   0
+
+IZ4APU Report cwsim 25/03/2026 14:46:17
+Durata 00:00:02
+Durata (QSO) 0
+Velocità CW 28 WPM
+Condizioni Difficoltà 
+Attività 8
+Durata 10
+Punti totali 0
+Prefissi totali 0
+Punteggio totale 0
+Punti verificati 0
+Prefissi verificati 0
+Punteggio verificato 0
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   0
+5-9   0

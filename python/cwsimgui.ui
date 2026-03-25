@@ -1440,7 +1440,7 @@
                </property>
               </widget>
              </item>
-            </layout>
+            <item row="1" column="0" colspan="2"><widget class="QComboBox" name="typeComboBox"><property name="focusPolicy"><enum>Qt::TabFocus</enum></property><property name="toolTip"><string>Choose operating mode</string></property><property name="accessibleName"><string>Operating Mode</string></property><item><property name="text"><string>Contest</string></property></item><item><property name="text"><string>DX Expedition</string></property></item></widget></item></layout>
            </widget>
           </item>
           <item>
@@ -1789,7 +1789,7 @@
   <tabstop>flutterProbSpinBox</tabstop>
   <tabstop>slowSpinBox</tabstop>
   <tabstop>contestComboBox</tabstop>
-  <tabstop>startStopButton</tabstop>
+  <tabstop>typeComboBox</tabstop><tabstop>startStopButton</tabstop>
   <tabstop>durationComboBox</tabstop>
   <tabstop>durationSpinBox</tabstop>
   <tabstop>activitySpinBox</tabstop>

@@ -208,12 +208,18 @@ class DxOperator():
          isme = self.ismycall()
          if isme == Mc.Yes:
             if self.state in [Os.NeedPrevEnd, Os.NeedQso, Os.NeedCallNr]:
-               self.setState(Os.NeedNr)
+               if self.isDxExpedition:
+                  self.setState(Os.NeedEnd)
+               else:
+                  self.setState(Os.NeedNr)
             elif self.state == Os.NeedCall:
                self.setState(Os.NeedEnd)
          elif isme == Mc.Almost:
             if self.state in [Os.NeedPrevEnd, Os.NeedQso, Os.NeedNr]:
-               self.setState(Os.NeedCallNr)
+               if self.isDxExpedition:
+                  self.setState(Os.NeedCall)
+               else:
+                  self.setState(Os.NeedCallNr)
             elif self.state == Os.NeedEnd:
                self.setState(Os.NeedCall)
          elif isme == Mc.No:
@@ -270,18 +276,20 @@ class DxOperator():
       elif self.state == Os.NeedCall:
          r1 = self._rng.random() # Morserunner's probabilities are 0.5, 0.5*0.25
          if r1 < 0.5:
-            res = StationMessage.DeMyCallNr1
+            res = StationMessage.DeMyCall if self.isDxExpedition else StationMessage.DeMyCallNr1
          elif r1 < 0.625:
-            res = StationMessage.DeMyCallNr2
+            res = StationMessage.DeMyCall if self.isDxExpedition else StationMessage.DeMyCallNr2
          else:
-            res = StationMessage.MyCallNr2
+            res = StationMessage.MyCall if self.isDxExpedition else StationMessage.MyCallNr2
       elif self.state == Os.NeedCallNr:
          if self._rng.random() < 0.5:
             res = StationMessage.DeMyCall1
          else:
             res = StationMessage.DeMyCall2
       else: #NeedEnd
-         if (self.patience == (DxOperator.FULL_PATIENCE-1)
+         if self.isDxExpedition:
+            res = StationMessage.TU
+         elif (self.patience == (DxOperator.FULL_PATIENCE-1)
             or self._rng.random() < 0.9):
             res = StationMessage.R_NR
          else:

@@ -28,7 +28,7 @@ class DxStation(station.Station):
       lids=True,lidNrProb=0.1,lidRstProb=0.03,qsb=True,flutterProb=0.3,
       rptProb=0.1,fast=1.1,slow=0.9,
       straightKeyProb=0.25,
-      isSingle=False,bufsize=512,rate=11025):
+      isSingle=False,isDxExpedition=False,bufsize=512,rate=11025):
       super().__init__(rng,keyer,bufsize=bufsize,rate=rate)
       if self._rng.random() < straightKeyProb:
          while True:
@@ -49,7 +49,6 @@ class DxStation(station.Station):
          rng,
          minutes,
          call=self.myCall,
-         skills=rng.integers(low=1,high=4),
          s2bfac=rate/bufsize,
          lids=lids,
          rptProb=rptProb,
@@ -57,6 +56,7 @@ class DxStation(station.Station):
          fast=fast,
          slow=slow,
          isSingle = isSingle,
+         isDxExpedition = isDxExpedition,
          state=Os.NeedPrevEnd,
          cqstn=cqstn)
       self.nrWithError = lids and (self._rng.random() < lidNrProb)
