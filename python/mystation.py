@@ -84,7 +84,7 @@ class MyStation(station.Station):
          res = False
       if res:
          s = self._keyer.encode(call.lower())
-         ne  = self._keyer.getenvelop(s,self.wpm)*self._amplitude
+         ne  = self._keyer.getenvelop(s,self.wpm,self.l,self.s,self.p)*self._amplitude
          res = len(ne) >= self._sendpos
          if res:
             res = np.array_equiv(self._envelop[0:self._sendpos]

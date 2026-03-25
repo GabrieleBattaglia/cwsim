@@ -110,6 +110,9 @@ class Station():
       self._timeout = NEVER
       self._amplitude = 0.7
       self.wpm = 30
+      self.l = 30
+      self.s = 50
+      self.p = 50
       self._rst = 599
       self.nr = 1
       self.nrWithError = False
@@ -154,7 +157,7 @@ class Station():
       else:
          self._msgtext = msg
       s = self._keyer.encode(self._msgtext.lower())
-      self._envelop = self._keyer.getenvelop(s,self.wpm)*self._amplitude
+      self._envelop = self._keyer.getenvelop(s,self.wpm,self.l,self.s,self.p)*self._amplitude
       self.state = StationState.Sending
       self._timeout = NEVER
 

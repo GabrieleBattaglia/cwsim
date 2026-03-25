@@ -283,6 +283,7 @@ class Contest():
                lidRstProb=self.lidRstProb,qsb=self.qsb,
                flutterProb=self.flutterProb,
                rptProb=self.rptProb,fast=self.fast,slow=self.slow,
+               straightKeyProb=self.straightKeyProb,
                isSingle=True,bufsize=self._bufsize,rate=self._rate)
             self.stations.append(s)
             s.processEvent(StationEvent.MeFinished)
@@ -401,6 +402,7 @@ class Contest():
       self.flutter = int(conditionsdict['flutter'])
       self.flutterProb = float(conditionsdict['flutterprob'])
       self.lids = int(conditionsdict['lids'])
+      self.straightKeyProb = float(conditionsdict.get('straightkeyprob', '0.25'))
       self.activity = int(conditionsdict['activity'])
       self.lidRstProb = float(conditionsdict['lidrstprob'])
       self.lidNrProb = float(conditionsdict['lidnrprob'])
@@ -426,7 +428,7 @@ class Contest():
             ,'qskdecaytime', 'cwreverse', 'rit', 'monitor']:
             p.set('Station',i,str(eval('self.'+i)))
          p.add_section('Conditions')
-         for i in ['qrn','qrm','tqrm','qsb','flutter','qsy','lids','activity'
+         for i in ['qrn','qrm','tqrm','qsb','flutter','qsy','lids','straightKeyProb','activity'
             ,'lidRstProb','lidNrProb','rptProb','flutterProb']:
             p.set('Conditions',i,str(eval('self.'+i)))
          p.add_section('Contest')

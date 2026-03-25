@@ -171,6 +171,7 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
       self.tqrmSpinBox.valueChanged.connect(self.tqrm)
       self.lidRstProbSpinBox.valueChanged.connect(self.lidRstProb)
       self.lidNrProbSpinBox.valueChanged.connect(self.lidNrProb)
+      self.straightKeyProbSpinBox.valueChanged.connect(self.straightKeyProb)
       self.rptProbSpinBox.valueChanged.connect(self.rptProb)
       self.flutterProbSpinBox.valueChanged.connect(self.flutterProb)
       self.fastSpinBox.valueChanged.connect(self.fast)
@@ -253,6 +254,7 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
       self.tqrmSpinBox.setValue(self.contest.tqrm)
       self.lidRstProbSpinBox.setValue(self.contest.lidRstProb)
       self.lidNrProbSpinBox.setValue(self.contest.lidNrProb)
+      self.straightKeyProbSpinBox.setValue(self.contest.straightKeyProb)
       self.rptProbSpinBox.setValue(self.contest.rptProb)
       self.flutterProbSpinBox.setValue(self.contest.flutterProb)
       self.fastSpinBox.setValue(self.contest.fast)
@@ -731,6 +733,9 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
  
    def lidNrProb(self,s):
       self.contest.lidNrProb = s
+
+   def straightKeyProb(self,s):
+      self.contest.straightKeyProb = s
 
    def rptProb(self,s):
       self.contest.rptProb = s

@@ -79,35 +79,60 @@ class Keyer():
          s += "~"
       return s
 
-   def getenvelop(self,msg,wpm):
+   def getenvelop(self,msg,wpm,l=30,s=50,p=50):
       """
          Arguments
             msg: morse encoding of dits and dahs
             wpm: speed in words per minute (PARIS)
+            l: dash weight (default 30)
+            s: space weight (default 50)
+            p: dot weight (default 50)
          Returns
             keying envelop for audio samples
       """
       nr = len(self.rise)
-      count = 2*(msg.count('.')+msg.count(' ')+2*msg.count('-'))+msg.count('~')
-      samples = int(np.rint(1.2*self.rate/wpm))
-      n = int(self._bufsize*np.ceil((count*samples+nr)/self._bufsize))
+      T_samples = 1.2 * self.rate / wpm
+      dot_on = int(np.rint(T_samples * (p / 50.0)))
+      dash_on = int(np.rint(3.0 * T_samples * (l / 30.0)))
+      intra_off = int(np.rint(T_samples * (s / 50.0)))
+      letter_gap_added = int(np.rint(3.0 * T_samples * (s / 50.0))) - intra_off
+      pad_added = int(np.rint(T_samples))
+      
+      # Calculate total length
+      total_samples = 0
+      for i in range(len(msg)):
+         if msg[i] == '.':
+            total_samples += dot_on + intra_off
+         elif msg[i] == '-':
+            total_samples += dash_on + intra_off
+         elif msg[i] == ' ':
+            total_samples += letter_gap_added - nr
+         elif msg[i] == '~':
+            total_samples += pad_added - nr
+            
+      n = int(self._bufsize*np.ceil((total_samples+nr+max(dot_on,dash_on))/self._bufsize))
       env = np.zeros(n,dtype=np.float32)
-      dit = np.ones(nr+samples,dtype=np.float32)
+      
+      dit = np.ones(nr+dot_on,dtype=np.float32)
       dit[:nr] = self.rise
-      dit[samples:] = self.fall
-      dah = np.ones(nr+3*samples,dtype=np.float32)
+      dit[dot_on:] = self.fall
+      
+      dah = np.ones(nr+dash_on,dtype=np.float32)
       dah[:nr] = self.rise
-      dah[3*samples:] = self.fall
+      dah[dash_on:] = self.fall
+      
       k = 0
       for i in range(len(msg)):
          if msg[i] == '.':
-            env[k:k+len(dit)] = dit
-            k += 2*samples
+            if k+len(dit) <= n:
+               env[k:k+len(dit)] = dit
+            k += dot_on + intra_off
          elif msg[i] == '-':
-            env[k:k+len(dah)] = dah
-            k += 4*samples
+            if k+len(dah) <= n:
+               env[k:k+len(dah)] = dah
+            k += dash_on + intra_off
          elif msg[i] == ' ':
-            k += 2*samples-nr
+            k += letter_gap_added - nr
          elif msg[i] == '~':
-            k += samples-nr
+            k += pad_added - nr
       return env

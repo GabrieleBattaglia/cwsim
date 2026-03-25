@@ -27,8 +27,20 @@ class DxStation(station.Station):
    def __init__(self,rng,keyer,callList,cqstn,minutes=0,
       lids=True,lidNrProb=0.1,lidRstProb=0.03,qsb=True,flutterProb=0.3,
       rptProb=0.1,fast=1.1,slow=0.9,
+      straightKeyProb=0.25,
       isSingle=False,bufsize=512,rate=11025):
       super().__init__(rng,keyer,bufsize=bufsize,rate=rate)
+      if self._rng.random() < straightKeyProb:
+         while True:
+            l = self._rng.integers(low=20, high=43)
+            p = self._rng.integers(low=18, high=55)
+            s = self._rng.integers(low=25, high=76)
+            if (l <= 24 and p <= 25 and s <= 35) or (l >= 38 and p >= 47 and s >= 65):
+               continue
+            self.l = l
+            self.p = p
+            self.s = s
+            break
       self.cqstn = cqstn
       self.hisCall = self.cqstn.myCall
       self.myCall = callList.pickCall()
