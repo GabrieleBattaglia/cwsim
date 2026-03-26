@@ -19,8 +19,8 @@ import station
 from station import StationMessage
 
 class MyStation(station.Station):
-   def __init__(self,rng,keyer,contest,myCall,pitch,wpm,bufsize=512,rate=11025):
-      super().__init__(rng,keyer,bufsize=bufsize,rate=rate)
+   def __init__(self,rng,keyer,contest,myCall,pitch,wpm,bufsize=512,rate=11025,isDxExpedition=False):
+      super().__init__(rng,keyer,bufsize=bufsize,rate=rate,isDxExpedition=isDxExpedition)
       self._contest = contest
       self.myCall = myCall
       self.nr = 1

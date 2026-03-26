@@ -86,6 +86,8 @@ class Contest():
          self.savewave = 0
          self.saveini = 1
          self.savesummary = 1
+         self.isDxExpedition = False
+         self.straightKeyProb = 0.25
          self.fontsize = 12 # not used
          
       self._qskdecayfactor = 1.0/(self._rate*self.qskdecaytime)
@@ -98,7 +100,7 @@ class Contest():
       self._callList = calllist.CallList(rng)
       self.stations = []
       self.me = MyStation(self._rng,self._keyer,self,self.call,self.pitch
-         ,self.wpm,bufsize=self._bufsize,rate=self._rate)
+         ,self.wpm,bufsize=self._bufsize,rate=self._rate,isDxExpedition=self.isDxExpedition)
       self.bufcount = 0
       self._rfg0 = 1.0
       self._rfg = np.zeros(self._bufsize+1,dtype=np.float64)
@@ -329,6 +331,7 @@ class Contest():
                   lidRstProb=self.lidRstProb,qsb=self.qsb,
                   flutterProb=self.flutterProb,
                   rptProb=self.rptProb,fast=self.fast,slow=self.slow,
+                  straightKeyProb=self.straightKeyProb,
                   isSingle=False,isDxExpedition=self.isDxExpedition,bufsize=self._bufsize,rate=self._rate))
       for s in self.stations:
          s.processEvent(StationEvent.MeFinished)

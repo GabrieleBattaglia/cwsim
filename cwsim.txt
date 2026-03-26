@@ -51,3 +51,144 @@ Punteggio verificato 0
 QSO per ora, suddiviso in intervalli da 5 minuti
 0-4   0
 5-9   0
+
+P55L Report cwsim (DX Expedition) 26/03/2026 14:00:31
+Durata 00:00:36
+Durata (QSO) 0
+Velocità CW 28 WPM
+Condizioni Difficoltà 
+Attività 8
+Durata 10
+Punti totali 0
+Prefissi totali 0
+Punteggio totale 0
+Punti verificati 0
+Prefissi verificati 0
+Punteggio verificato 0
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   0
+5-9   0
+
+P55L Report cwsim (DX Expedition) 26/03/2026 14:01:42
+Durata 00:00:15
+Durata (QSO) 0
+Velocità CW 28 WPM
+Condizioni Difficoltà 
+Attività 8
+Durata 10
+Punti totali 0
+Prefissi totali 0
+Punteggio totale 0
+Punti verificati 0
+Prefissi verificati 0
+Punteggio verificato 0
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   0
+5-9   0
+
+P55L Report cwsim (DX Expedition) 26/03/2026 14:02:28
+Durata 00:00:36
+Durata (QSO) 0
+Velocità CW 28 WPM
+Condizioni Difficoltà 
+Attività 8
+Durata 10
+Punti totali 0
+Prefissi totali 0
+Punteggio totale 0
+Punti verificati 0
+Prefissi verificati 0
+Punteggio verificato 0
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   0
+5-9   0
+
+P55L Report cwsim (DX Expedition) 26/03/2026 15:36:55
+Durata 00:01:24
+Durata (QSO) 0
+Velocità CW 28 WPM
+Condizioni Difficoltà 
+Attività 8
+Durata 10
+Punti totali 0
+Prefissi totali 0
+Punteggio totale 0
+Punti verificati 0
+Prefissi verificati 0
+Punteggio verificato 0
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   0
+5-9   0
+
+P55L Report cwsim (DX Expedition) 26/03/2026 15:48:24
+Durata 00:01:54
+Durata (QSO) 0
+Velocità CW 28 WPM
+Condizioni Difficoltà 
+Attività 8
+Durata 10
+Punti totali 0
+Prefissi totali 0
+Punteggio totale 0
+Punti verificati 0
+Prefissi verificati 0
+Punteggio verificato 0
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   0
+5-9   0
+
+P55L Report cwsim (DX Expedition) 26/03/2026 16:07:52
+Durata 00:03:03
+Durata (QSO) 2
+Velocità CW 28 WPM
+Condizioni Difficoltà 
+Attività 8
+Durata 10
+Punti totali 2
+Prefissi totali 2
+Punteggio totale 4
+Punti verificati 2
+Prefissi verificati 2
+Punteggio verificato 4
+Percentuale d'errore 0.0
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   24
+5-9   0
+
+P55L Report cwsim (DX Expedition) 26/03/2026 16:12:50
+Durata 00:00:33
+Durata (QSO) 1
+Velocità CW 28 WPM
+Condizioni Difficoltà 
+Attività 8
+Durata 10
+Punti totali 1
+Prefissi totali 1
+Punteggio totale 1
+Punti verificati 1
+Prefissi verificati 1
+Punteggio verificato 1
+Percentuale d'errore 0.0
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   12
+5-9   0
+
+P55L Report cwsim (DX Expedition) 26/03/2026 16:17:15
+Durata 00:03:07
+Durata (QSO) 10
+Velocità CW 30 WPM
+Condizioni Difficoltà 
+Attività 8
+Durata 10
+Punti totali 10
+Prefissi totali 10
+Punteggio totale 100
+Punti verificati 8
+Prefissi verificati 8
+Punteggio verificato 64
+Percentuale d'errore 20.0
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   120
+5-9   0
+Nominativi copiati male
+YZ9CCU JJ2ONS

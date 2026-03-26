@@ -47,7 +47,7 @@ class DxOperator():
    FULL_PATIENCE = 5
    def __init__(self,rng,minutes=0,cqstn=None,call=None,skills=2,
       s2bfac=11025/512,lids=True,rptProb=0.1,wpm=40,fast=1.1,slow=0.9,
-      isSingle=False,state=Os.NeedPrevEnd):
+      isSingle=False,isDxExpedition=False,state=Os.NeedPrevEnd):
       """
          Arguments
             rng: numpy random number generator
@@ -57,6 +57,7 @@ class DxOperator():
             call: My station's call
             skills: My skills
             isSingle: True if RunMode is single calls
+            isDxExpedition: True if in DX Expedition mode
             state: Initial operator state
       """
       self._rng = rng
@@ -69,6 +70,7 @@ class DxOperator():
       self.repeatCnt= None
       self._minutes = minutes
       self._isSingle = isSingle
+      self.isDxExpedition = isDxExpedition
       self._lids = lids
       self._wpm = wpm
       self._slow = slow
@@ -152,7 +154,7 @@ class DxOperator():
          for y in range(1,len(c0)+1):
             d = m[x-1,y-1]
             if c[x-1] != c0[y-1]: d += 1
-            m[x,y] = np.min([m[x,y-1],m[x-1,y]+1,d])
+            m[x,y] = np.min([m[x,y-1],m[x-1,y],d])
       else:
          for y in range(1,len(c0)+1):
             m[x,y] = np.min([m[x,y-1],m[x-1,y],m[x-1,y-1]])
@@ -276,24 +278,21 @@ class DxOperator():
       elif self.state == Os.NeedCall:
          r1 = self._rng.random() # Morserunner's probabilities are 0.5, 0.5*0.25
          if r1 < 0.5:
-            res = StationMessage.DeMyCall if self.isDxExpedition else StationMessage.DeMyCallNr1
+            res = StationMessage.DeMyCallNr1
          elif r1 < 0.625:
-            res = StationMessage.DeMyCall if self.isDxExpedition else StationMessage.DeMyCallNr2
+            res = StationMessage.DeMyCallNr2
          else:
-            res = StationMessage.MyCall if self.isDxExpedition else StationMessage.MyCallNr2
+            res = StationMessage.MyCallNr2
       elif self.state == Os.NeedCallNr:
          if self._rng.random() < 0.5:
             res = StationMessage.DeMyCall1
          else:
             res = StationMessage.DeMyCall2
       else: #NeedEnd
-         if self.isDxExpedition:
-            res = StationMessage.TU
-         elif (self.patience == (DxOperator.FULL_PATIENCE-1)
+         if (self.patience == (DxOperator.FULL_PATIENCE-1)
             or self._rng.random() < 0.9):
             res = StationMessage.R_NR
          else:
             res = StationMessage.R_NR2
  
       return res
-

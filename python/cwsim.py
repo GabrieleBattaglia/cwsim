@@ -186,6 +186,7 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
       self._goodQsoCount = 0
       self._qtimes = []
       scdict = { "Alt+W":self.wipe, "Return":self.enter, "Escape":self.escape,
+        "Tab":self.tab, "Shift+Tab":self.backtab,
         "F1":self.f1, "F2":self.f2, "F3":self.f3, "F4":self.f4, "F5":self.f5,
         "F6":self.f6, "F7":self.f7, "F8":self.f8, "Shift+Up":self.ritup,
         "Shift+Down":self.ritdown, "Alt+C":self.ritclear, "Ctrl+Up":self.bwup,
@@ -260,7 +261,9 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
       self.flutterProbSpinBox.setValue(self.contest.flutterProb)
       self.fastSpinBox.setValue(self.contest.fast)
       self.slowSpinBox.setValue(self.contest.slow)
-      self.typeComboBox.setCurrentIndex(1 if getattr(self.contest, 'isDxExpedition', False) else 0)
+      is_dx = getattr(self.contest, 'isDxExpedition', False)
+      self.typeComboBox.setCurrentIndex(1 if is_dx else 0)
+      self.nrEntry.setEnabled(not is_dx)
       if self.contest.mode == RunMode.pileup:
          self.contestComboBox.setCurrentIndex(0)
          self.durationComboBox.setCurrentIndex(0)
@@ -315,8 +318,9 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
          with open(filename,mode,encoding='utf8') as f:
             if self.contest.savesummary == 2:
                f.write("\n")
+            mode_str = "DX Expedition" if getattr(self.contest, 'isDxExpedition', False) else "Contest"
             s = (self.contest.call + " " + _translate("RunApp","cwsim summary")
-               + " " + datetime.datetime.now().strftime("%c") + "\n")
+               + " (" + mode_str + ") " + datetime.datetime.now().strftime("%c") + "\n")
             f.write(s)
             sec = int(self.contest.seconds)
             h = sec//3600
@@ -396,7 +400,8 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
                chk = self.logTable.item(i,cols-1).text()
                if chk == "NIL":
                   nil.append(self.logTable.item(i,1).text())
-               if chk.count("NR") != 0 or chk.count("RST") != 0:
+               is_dx = getattr(self.contest, 'isDxExpedition', False)
+               if chk.count("RST") != 0 or (not is_dx and chk.count("NR") != 0):
                   ex.append((self.logTable.item(i,1).text(),
                      self.logTable.item(i,2).text(),chk))
                if chk == "QSY":
@@ -787,13 +792,15 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
 
    def semicolon(self):
       self.sendMsg(StationMessage.HisCall)
-      self.sendMsg(StationMessage.NR)
+      if not getattr(self.contest, 'isDxExpedition', False):
+         self.sendMsg(StationMessage.NR)
 
    def f1(self):
       self.sendMsg(StationMessage.CQ)
 
    def f2(self):
-      self.sendMsg(StationMessage.NR)
+      if not getattr(self.contest, 'isDxExpedition', False):
+         self.sendMsg(StationMessage.NR)
 
    def f3(self):
       self.sendMsg(StationMessage.TU)
@@ -822,6 +829,76 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
    def entrytabs(self):
       self.tr = self.entryTabs.currentIndex() == 1
 
+   def space(self):
+      if self.tr: return
+      self._mustAdvance = False
+      foc = QtWidgets.QApplication.focusWidget()
+      is_dx = getattr(self.contest, 'isDxExpedition', False)
+      if foc is self.callEntry:
+         if self._rst == '':
+            self.rstEntry.setText('599')
+         else:
+            self.rstEntry.deselect()
+         if is_dx:
+            self.rstEntry.setFocus()
+         else:
+            self.nrEntry.setFocus()
+      elif foc in [self.rstEntry, self.nrEntry]:
+         self.callEntry.setFocus()
+      else:
+         self.callEntry.setFocus()
+
+   def tab(self):
+      foc = QtWidgets.QApplication.focusWidget()
+      is_dx = getattr(self.contest, 'isDxExpedition', False)
+      if foc is self.callEntry:
+         self.rstEntry.setFocus()
+         if len(self._rst) == 3:
+            self.rstEntry.setSelection(1,1)
+      elif foc == self.rstEntry:
+         if is_dx:
+            self.callEntry.setFocus()
+            i = self._hiscall.find('?')
+            if i>= 0:
+               self.callEntry.setSelection(i,1)
+            else:
+               self.callEntry.deselect()
+               self.callEntry.end(False)
+         else:
+            self.nrEntry.setFocus()
+            self.nrEntry.deselect()
+      elif foc == self.nrEntry:
+         self.callEntry.setFocus()
+         i = self._hiscall.find('?')
+         if i>= 0:
+            self.callEntry.setSelection(i,1)
+         else:
+            self.callEntry.deselect()
+            self.callEntry.end(False)
+      elif foc is self.trCallEntry:
+         self.trExchangeEntry.setFocus()
+      elif foc is self.trExchangeEntry:
+         self.trCallEntry.setFocus()
+
+   def backtab(self):
+      foc = QtWidgets.QApplication.focusWidget()
+      is_dx = getattr(self.contest, 'isDxExpedition', False)
+      if foc is self.rstEntry:
+         self.callEntry.setFocus()
+         self.callEntry.end(False)
+      elif foc is self.nrEntry:
+         self.rstEntry.setFocus()
+         if len(self._rst) == 3:
+            self.rstEntry.setSelection(1,1)
+      elif foc is self.callEntry:
+         if is_dx:
+            self.rstEntry.setFocus()
+            if len(self._rst) == 3:
+               self.rstEntry.setSelection(1,1)
+         else:
+            self.nrEntry.setFocus()
+            self.nrEntry.deselect()
+
    def enter(self):
       if self.tr:
          self.trCallEntry.setText(self._hiscall)
@@ -829,20 +906,30 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
       if self._hiscall == '':
          self.sendMsg(StationMessage.CQ)
       else:
+         dx_exp = getattr(self.contest, 'isDxExpedition', False)
          c = self._callsent
          n = self._nrsent
          r = self._nr != ""
-         if (not c) or ((not n) and (not r)):
-            self.sendMsg(StationMessage.HisCall)
-         if not n:
-            self.sendMsg(StationMessage.NR)
-         if n and not r:
-            self.sendMsg(StationMessage.Qm)
-         if r and (c or n):
-            self.sendMsg(StationMessage.TU)
-            self.saveQso()
+         
+         if dx_exp:
+            if not c:
+               self.sendMsg(StationMessage.HisCall)
+               self.sendMsg(StationMessage.NR) # Sends RST in DX mode
+            else:
+               self.sendMsg(StationMessage.TU)
+               self.saveQso()
          else:
-            self._mustAdvance = True
+            if (not c) or ((not n) and (not r)):
+               self.sendMsg(StationMessage.HisCall)
+            if not n:
+               self.sendMsg(StationMessage.NR)
+            if n and not r:
+               self.sendMsg(StationMessage.Qm)
+            if r and (c or n):
+               self.sendMsg(StationMessage.TU)
+               self.saveQso()
+            else:
+               self._mustAdvance = True
 
    def qsy(self):
       self.qsysig.emit()
@@ -875,12 +962,11 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
                self.rstEntry.setText('599')
             else:
                self.rstEntry.deselect()
-            if self._hiscall.find('?') == -1:
+            if self._hiscall.find('?') == -1 and not getattr(self.contest, 'isDxExpedition', False):
                self.nrEntry.setFocus()
             else:
                self.callEntry.setFocus()
          self._mustAdvance = False
-
    def lastQso(self):
       self.lastqsosig.emit()
 
@@ -965,18 +1051,18 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
       time.sleep(0) #yield
       #check needed if period or equivalent typed before QSO info set up
       dx_exp = getattr(self.contest, 'isDxExpedition', False)
+      if self._rst == "":
+         self._rst = "599"
       if dx_exp:
-         if not (self._hiscall and self._rst):
+         if not self._hiscall:
             return
       else:
-         if not (self._hiscall and self._nr and self._rst):
+         if not (self._hiscall and self._nr):
             return
       self._nrsent = False
       self._callsent = False
       self._rawQsoCount += 1
       h,m,s = self.contest.time()
-      if self._rst == "":
-         self._rst = "599"
       self._lastLog = [self._hiscall, int(self._nr) if self._nr else 0, int(self._rst)]
       time.sleep(0) #yield
       rawPfx = self.prefix.getPrefix(self._hiscall)
@@ -1064,6 +1150,9 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
          self.rstEntry.setText("")
          self.nrEntry.setText("")
          self.callEntry.setFocus()
+      self._hiscall = ""
+      self._rst = ""
+      self._nr = ""
       self._callsent = False
       self._nrsent = False
 
@@ -1125,41 +1214,6 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
       else:
          self.ritdown()
 
-   def space(self):
-      if self.tr: return
-      self._mustAdvance = False
-      foc = QtWidgets.QApplication.focusWidget()
-      if foc in [self.callEntry, self.rstEntry]:
-         if self._rst == '':
-            self.rstEntry.setText('599')
-         else:
-            self.rstEntry.deselect()
-         self.nrEntry.setFocus()
-      else:
-         self.callEntry.setFocus()
-
-   def tab(self):
-      foc = QtWidgets.QApplication.focusWidget()
-      if foc is self.callEntry:
-         self.rstEntry.setFocus()
-         if len(self._rst) == 3:
-            self.rstEntry.setSelection(1,1)
-      elif foc == self.rstEntry:
-         self.nrEntry.setFocus()
-         self.nrEntry.deselect()
-      elif foc == self.nrEntry:
-         self.callEntry.setFocus()
-         i = self._hiscall.find('?')
-         if i>= 0:
-            self.callEntry.setSelection(i,1)
-         else:
-            self.callEntry.deselect()
-            self.callEntry.end(False)
-      elif foc is self.trCallEntry:
-         self.trExchangeEntry.setFocus()
-      elif foc is self.trExchangeEntry:
-         self.trCallEntry.setFocus()
-
    def close(self):
       if not os.path.exists(self.defaultini) or self.contest.saveini != 0:
          self.contest.writeConfig(self.defaultini)
@@ -1169,6 +1223,10 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
 if __name__ == "__main__":
    import locale
    locale.setlocale(locale.LC_ALL,"")
+   print("Welcome to Cwsim - Python CW Simulator")
+   print("Author: Kevin E. Schmidt, W9CF")
+   print("Version: Testing version")
+   print("Date: giovedì 26 marzo 2026")
    app = QApplication(sys.argv)
    translator = QtCore.QTranslator()
    if getattr(sys,'frozen',False):

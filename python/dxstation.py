@@ -29,7 +29,7 @@ class DxStation(station.Station):
       rptProb=0.1,fast=1.1,slow=0.9,
       straightKeyProb=0.25,
       isSingle=False,isDxExpedition=False,bufsize=512,rate=11025):
-      super().__init__(rng,keyer,bufsize=bufsize,rate=rate)
+      super().__init__(rng,keyer,bufsize=bufsize,rate=rate,isDxExpedition=isDxExpedition)
       if self._rng.random() < straightKeyProb:
          while True:
             l = self._rng.integers(low=20, high=43)

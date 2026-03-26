@@ -20,20 +20,22 @@ Il cuore del comportamento delle stazioni chiamanti risiede in `dxoper.py` e `dx
     *   Modificato il metodo `msgReceived()` (che analizza cosa hai trasmesso tu): se `isDxExpedition` è vera, la macchina a stati si ritiene soddisfatta saltando la richiesta del numero progressivo e passando a `NeedEnd`.
     *   Modificato il metodo `getReply()`: omesso l'invio del proprio NR se `isDxExpedition` è attiva.
 
-## 3. Logica di Validazione del QSO dell'Utente (`cwsim.py`)
+## 3. Logica di Validazione del QSO dell'Utente (`cwsim.py`) (COMPLETATO)
 Il motore principale di log deve adattarsi all'assenza dell'NR.
 *   **`saveQso()`**:
-    *   Rimuovere l'obbligatorietà del campo `self._nr` nel controllo iniziale (`if not (self._hiscall and self._rst)`).
-    *   Inserire un valore fittizio o vuoto nel log per quanto riguarda la colonna `Sent` o `Rcvd` del progressivo, senza che questo causi crash al simulatore.
+    *   Rimossa l'obbligatorietà dell'NR se `isDxExpedition` è attiva.
+    *   Le colonne "Sent" e "Recv" ora mostrano solo l'RST in modalità DX Expedition.
 *   **`checkQso()`**:
-    *   Disabilitare il confronto di `self._lastLog[1] != self._lastQso[1]` (che rappresenta l'NR) quando la modalità DX Expedition è attiva.
+    *   Disabilitato il controllo dell'NR per la verifica del punto se la modalità DX Expedition è attiva.
 *   **Motore di Pressione Tasti (`enter()` e `;`)**:
-    *   Nella funzione `enter()`, quando l'operatore preme Invio, il sistema verifica se ha inviato Call e NR per passare allo stato successivo. Bisogna dire al sistema di non forzare l'invio del messaggio `StationMessage.NR` o del punto interrogativo se `isDxExpedition` è attiva e l'NR è assente.
+    *   Modificato `enter()`: ora in modalità DX Expedition, premere invio invia TU e salva il QSO subito dopo aver trasmesso il call del corrispondente.
+    *   Inibito l'invio dell'NR tramite tasto `F2` o `;` quando in modalità DX Expedition.
 
-## 4. Aggiornamento delle Statistiche Finali
+## 4. Aggiornamento delle Statistiche Finali (COMPLETATO)
 *   **`writeSummary()` in `cwsim.py`**:
-    *   L'intestazione del file TXT prodotto deve chiarire se la sessione era "Contest" o "DX Expedition".
-    *   Quando si scansionano i log per riportare gli errori di scambio ("Exchanges miscopied"), la funzione non dovrà segnalare errore se l'NR è assente ma il resto è corretto.
+    *   L'intestazione del file TXT prodotto ora specifica tra parentesi se la sessione era "(Contest)" o "(DX Expedition)".
+    *   Nella sezione degli errori di scambio ("Exchanges miscopied"), gli errori relativi all'NR vengono ignorati se la modalità DX Expedition è attiva, evitando segnalazioni errate.
 
 ---
-**Sei d'accordo con questo approccio passo-passo?** Possiamo iniziare dalla modifica dell'interfaccia e della configurazione, per poi passare al motore a stati dei bot e infine alla validazione del log.
+**Implementazione completata.** La modalità DX Expedition è ora pienamente operativa, integrata nella GUI, salvata nelle impostazioni e rispettata sia dai Bot che dalla logica di validazione del log.
+
