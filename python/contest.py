@@ -88,6 +88,9 @@ class Contest():
          self.savesummary = 1
          self.isDxExpedition = False
          self.straightKeyProb = 0.25
+         self.myRstSpeedUp = 0.20
+         self.dxRstSpeedUp = 0.15
+         self.dxRstProb = 0.15
          self.fontsize = 12 # not used
          
       self._qskdecayfactor = 1.0/(self._rate*self.qskdecaytime)
@@ -286,7 +289,9 @@ class Contest():
                flutterProb=self.flutterProb,
                rptProb=self.rptProb,fast=self.fast,slow=self.slow,
                straightKeyProb=self.straightKeyProb,
-               isSingle=True,isDxExpedition=self.isDxExpedition,bufsize=self._bufsize,rate=self._rate)
+               isSingle=True,isDxExpedition=self.isDxExpedition,
+               dxRstSpeedUp=self.dxRstSpeedUp, dxRstProb=self.dxRstProb,
+               bufsize=self._bufsize,rate=self._rate)
             self.stations.append(s)
             s.processEvent(StationEvent.MeFinished)
 
@@ -332,7 +337,9 @@ class Contest():
                   flutterProb=self.flutterProb,
                   rptProb=self.rptProb,fast=self.fast,slow=self.slow,
                   straightKeyProb=self.straightKeyProb,
-                  isSingle=False,isDxExpedition=self.isDxExpedition,bufsize=self._bufsize,rate=self._rate))
+                  isSingle=False,isDxExpedition=self.isDxExpedition,
+                  dxRstSpeedUp=self.dxRstSpeedUp, dxRstProb=self.dxRstProb,
+                  bufsize=self._bufsize,rate=self._rate))
       for s in self.stations:
          s.processEvent(StationEvent.MeFinished)
 
@@ -410,6 +417,9 @@ class Contest():
       self.lidRstProb = float(conditionsdict['lidrstprob'])
       self.lidNrProb = float(conditionsdict['lidnrprob'])
       self.rptProb = float(conditionsdict['rptprob'])
+      self.myRstSpeedUp = float(conditionsdict.get('myrstspeedup', '0.20'))
+      self.dxRstSpeedUp = float(conditionsdict.get('dxrstspeedup', '0.15'))
+      self.dxRstProb = float(conditionsdict.get('dxrstprob', '0.15'))
       contestdict = dict(p['Contest'])
       self.duration = int(contestdict['duration'])
       self.mode = eval(contestdict['mode'])
@@ -433,7 +443,7 @@ class Contest():
             p.set('Station',i,str(eval('self.'+i)))
          p.add_section('Conditions')
          for i in ['qrn','qrm','tqrm','qsb','flutter','qsy','lids','straightKeyProb','activity'
-            ,'lidRstProb','lidNrProb','rptProb','flutterProb']:
+            ,'lidRstProb','lidNrProb','rptProb','flutterProb','myRstSpeedUp','dxRstSpeedUp','dxRstProb']:
             p.set('Conditions',i,str(eval('self.'+i)))
          p.add_section('Contest')
          for i in ['duration','mode','savewave','saveini','savesummary','isDxExpedition']:

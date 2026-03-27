@@ -60,6 +60,9 @@ class ToUpperRegularExpressionValidator(QtGui.QRegularExpressionValidator):
       acceptable, string , pos =  super().validate(string,pos)
       return (acceptable, string.upper(), pos)
 
+VERSION = "1.0.2"
+RELEASE_DATE = "venerdì 27 marzo 2026"
+
 class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
 
    advancesig = QtCore.pyqtSignal()
@@ -175,6 +178,9 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
       self.straightKeyProbSpinBox.valueChanged.connect(self.straightKeyProb)
       self.rptProbSpinBox.valueChanged.connect(self.rptProb)
       self.flutterProbSpinBox.valueChanged.connect(self.flutterProb)
+      self.myRstSpeedUpSpinBox.valueChanged.connect(self.myRstSpeedUp)
+      self.dxRstSpeedUpSpinBox.valueChanged.connect(self.dxRstSpeedUp)
+      self.dxRstProbSpinBox.valueChanged.connect(self.dxRstProb)
       self.fastSpinBox.valueChanged.connect(self.fast)
       self.slowSpinBox.valueChanged.connect(self.slow)
       self.trExchangeEntry.setEnabled(False)
@@ -227,6 +233,9 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
       self._goodPfxs = set()
       self.prefix = Prefix()
       self.nrchecked = 0
+      welcome_msg = _translate("RunApp", "Welcome to Cwsim {version} ({date}) by Kevin Schmidt (W9CF) and Gabriele Battaglia (IZ4APU)").format(version=VERSION, date=RELEASE_DATE)
+      self.logTable.insertRow(0)
+      self.logTable.setItem(0, 1, QTableWidgetItem(welcome_msg))
 
    def syncGui(self):
       self.action_Update_Default_Configuration_on_Exit.setChecked(
@@ -257,6 +266,9 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
       self.lidRstProbSpinBox.setValue(self.contest.lidRstProb)
       self.lidNrProbSpinBox.setValue(self.contest.lidNrProb)
       self.straightKeyProbSpinBox.setValue(self.contest.straightKeyProb)
+      self.myRstSpeedUpSpinBox.setValue(self.contest.myRstSpeedUp)
+      self.dxRstSpeedUpSpinBox.setValue(self.contest.dxRstSpeedUp)
+      self.dxRstProbSpinBox.setValue(self.contest.dxRstProb)
       self.rptProbSpinBox.setValue(self.contest.rptProb)
       self.flutterProbSpinBox.setValue(self.contest.flutterProb)
       self.fastSpinBox.setValue(self.contest.fast)
@@ -601,14 +613,15 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
             sc.setEnabled(True)
 
    def about(self):
-      version = "Testing version"
+      version = VERSION
       msg = """
-   Python CW Simulator {}
+   Python CW Simulator {} ({})
    Copyright 2022, Kevin E. Schmidt, W9CF, w9cf@arrl.net
+   Authors: Kevin Schmidt (W9CF) and Gabriele Battaglia (IZ4APU)
 
    Based on and derivative of Morse Runner
    Copyright 2004-2006, Alex Shovkoplyas, VE3NEA
-   ve3nea@dxatlast.com""".format(version)
+   ve3nea@dxatlast.com""".format(version, RELEASE_DATE)
       QtWidgets.QMessageBox.about(self,"CW Simulator",msg)
 
    def shortcutHelp(self):
@@ -746,6 +759,17 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
 
    def straightKeyProb(self,s):
       self.contest.straightKeyProb = s
+
+   def myRstSpeedUp(self,s):
+      self.contest.myRstSpeedUp = s
+      if self.contest.me is not None:
+         self.contest.me.myRstSpeedUp = s
+
+   def dxRstSpeedUp(self,s):
+      self.contest.dxRstSpeedUp = s
+
+   def dxRstProb(self,s):
+      self.contest.dxRstProb = s
 
    def rptProb(self,s):
       self.contest.rptProb = s
@@ -1223,10 +1247,6 @@ class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
 if __name__ == "__main__":
    import locale
    locale.setlocale(locale.LC_ALL,"")
-   print("Welcome to Cwsim - Python CW Simulator")
-   print("Author: Kevin E. Schmidt, W9CF")
-   print("Version: Testing version")
-   print("Date: giovedì 26 marzo 2026")
    app = QApplication(sys.argv)
    translator = QtCore.QTranslator()
    if getattr(sys,'frozen',False):
@@ -1241,6 +1261,11 @@ if __name__ == "__main__":
    tdir = os.path.join(tdir,'translate')
    translator.load(tfile,tdir)
    app.installTranslator(translator)
+   _translate = QtCore.QCoreApplication.translate
+   print(_translate("RunApp", "Welcome to Cwsim - Python CW Simulator"))
+   print(_translate("RunApp", "Authors: Kevin Schmidt (W9CF) and Gabriele Battaglia (IZ4APU)"))
+   print(_translate("RunApp", "Version: {version}").format(version=VERSION))
+   print(_translate("RunApp", "Date: {date}").format(date=RELEASE_DATE))
    form = RunApp()
    form.show()
    app.exec()

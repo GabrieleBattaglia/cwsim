@@ -28,8 +28,11 @@ class DxStation(station.Station):
       lids=True,lidNrProb=0.1,lidRstProb=0.03,qsb=True,flutterProb=0.3,
       rptProb=0.1,fast=1.1,slow=0.9,
       straightKeyProb=0.25,
-      isSingle=False,isDxExpedition=False,bufsize=512,rate=11025):
+      isSingle=False,isDxExpedition=False,
+      dxRstSpeedUp=0.15, dxRstProb=0.15,
+      bufsize=512,rate=11025):
       super().__init__(rng,keyer,bufsize=bufsize,rate=rate,isDxExpedition=isDxExpedition)
+      self.myRstSpeedUp = dxRstSpeedUp
       if self._rng.random() < straightKeyProb:
          while True:
             l = self._rng.integers(low=20, high=43)
@@ -62,6 +65,8 @@ class DxStation(station.Station):
       self.nrWithError = lids and (self._rng.random() < lidNrProb)
       self.wpm = self.oper.getWpm()
       self.nr = self.oper.getNr()
+      self.nrChecked = 0
+      self.speedUpRst = isDxExpedition and (self._rng.random() < dxRstProb)
       if lids and self._rng.random() < lidRstProb:
          self._rst = 559+10*self._rng.integers(4)
       else:

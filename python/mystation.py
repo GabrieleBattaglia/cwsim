@@ -27,6 +27,7 @@ class MyStation(station.Station):
       self._rst = 599
       self.pitch = pitch
       self.wpm = wpm
+      self.speedUpRst = isDxExpedition
       self._amplitude = 1.0
       self._pieces = []
       self.app = None

@@ -116,6 +116,8 @@ class Station():
       self._rst = 599
       self.nr = 1
       self.isDxExpedition = isDxExpedition
+      self.speedUpRst = False
+      self.myRstSpeedUp = 0.20
       self.nrWithError = False
       self.myCall = ''
       self.hisCall = ''
@@ -158,7 +160,7 @@ class Station():
       else:
          self._msgtext = msg
       s = self._keyer.encode(self._msgtext.lower())
-      self._envelop = self._keyer.getenvelop(s,self.wpm,self.l,self.s,self.p)*self._amplitude
+      self._envelop = self._keyer.getenvelop(s,self.wpm,self.l,self.s,self.p,speed_up_factor=self.myRstSpeedUp)*self._amplitude
       self.state = StationState.Sending
       self._timeout = NEVER
 
@@ -190,6 +192,8 @@ class Station():
          s = '{:d}'.format(int(self._rst))
       else:
          s = '{:d}{:03d}'.format(int(self._rst),int(self.nr))
+      if self.speedUpRst:
+         s = '>' + s + '<'
       if self.nrWithError and not self.isDxExpedition:
          if s[-1] in ['2','3','4','5','6','7']:
             if self._rng.random() < 0.5:

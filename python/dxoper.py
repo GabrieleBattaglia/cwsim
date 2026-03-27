@@ -77,6 +77,7 @@ class DxOperator():
       self._fast = fast
       self._rptProb = rptProb
       self._s2bfac = s2bfac
+      self.rstSent = False
 
    def getSendDelay(self):
       """
@@ -266,7 +267,7 @@ class DxOperator():
          return reply message.
       """
       if self.state in [Os.NeedPrevEnd, Os.Done, Os.Failed]:
-         res = StationMessage.noMsg
+         res = StationMessage.NoMsg
       elif self.state == Os.NeedQso:
          res = StationMessage.MyCall
       elif self.state == Os.NeedNr:
@@ -289,10 +290,31 @@ class DxOperator():
          else:
             res = StationMessage.DeMyCall2
       else: #NeedEnd
-         if (self.patience == (DxOperator.FULL_PATIENCE-1)
-            or self._rng.random() < 0.9):
-            res = StationMessage.R_NR
+         if self.isDxExpedition:
+            if not self.rstSent:
+               res = StationMessage.R_NR # Send RST if not sent yet
+            else:
+               # RST already sent, send final greetings
+               r = self._rng.random()
+               if r < 0.4:
+                  res = StationMessage.TU
+               elif r < 0.6:
+                  res = StationMessage.NoMsg
+               elif r < 0.8:
+                  res = StationMessage.NoMsg # Silence is common
+               else:
+                  res = StationMessage.TU
          else:
-            res = StationMessage.R_NR2
+            if (self.patience == (DxOperator.FULL_PATIENCE-1)
+               or self._rng.random() < 0.9):
+               res = StationMessage.R_NR
+            else:
+               res = StationMessage.R_NR2
+      
+      # Track if RST was sent in this reply
+      if res in [StationMessage.R_NR, StationMessage.R_NR2, 
+                 StationMessage.DeMyCallNr1, StationMessage.DeMyCallNr2,
+                 StationMessage.MyCallNr2, StationMessage.NR]:
+         self.rstSent = True
  
       return res

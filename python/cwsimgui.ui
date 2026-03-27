@@ -810,7 +810,93 @@
                    </property>
                   </widget>
                  </item>
-                <item row="4" column="0"><widget class="QLabel" name="straightKeyLabel"><property name="text"><string>Straight Key %</string></property></widget></item><item row="4" column="1"><widget class="QDoubleSpinBox" name="straightKeyProbSpinBox"><property name="focusPolicy"><enum>Qt::StrongFocus</enum></property><property name="toolTip"><string>Probability of stations using a straight key (0 to 1)</string></property><property name="accessibleName"><string>Straight Key probability</string></property><property name="maximum"><double>1.000000000000000</double></property><property name="singleStep"><double>0.010000000000000</double></property></widget></item></layout>
+                <item row="4" column="1">
+                 <widget class="QLabel" name="straightKeyLabel">
+                  <property name="text">
+                   <string>Straight Key %</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="2">
+                 <widget class="QLabel" name="myRstSpeedUpLabel">
+                  <property name="text">
+                   <string>My RST Speed Up %</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="3">
+                 <widget class="QLabel" name="dxRstSpeedUpLabel">
+                  <property name="text">
+                   <string>Bot RST Speed Up %</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="4">
+                 <widget class="QLabel" name="dxRstProbLabel">
+                  <property name="text">
+                   <string>Bot Speed Up Prob %</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="1">
+                 <widget class="QDoubleSpinBox" name="straightKeyProbSpinBox">
+                  <property name="focusPolicy">
+                   <enum>Qt::StrongFocus</enum>
+                  </property>
+                  <property name="toolTip">
+                   <string>Probability of stations using a straight key (0 to 1)</string>
+                  </property>
+                  <property name="accessibleName">
+                   <string>Straight Key probability</string>
+                  </property>
+                  <property name="maximum">
+                   <double>1.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.010000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="2">
+                 <widget class="QDoubleSpinBox" name="myRstSpeedUpSpinBox">
+                  <property name="toolTip">
+                   <string>My RST speed increase (0 to 1)</string>
+                  </property>
+                  <property name="maximum">
+                   <double>1.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.010000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="3">
+                 <widget class="QDoubleSpinBox" name="dxRstSpeedUpSpinBox">
+                  <property name="toolTip">
+                   <string>Bot RST speed increase (0 to 1)</string>
+                  </property>
+                  <property name="maximum">
+                   <double>1.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.010000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="4">
+                 <widget class="QDoubleSpinBox" name="dxRstProbSpinBox">
+                  <property name="toolTip">
+                   <string>Probability of bots using speed up (0 to 1)</string>
+                  </property>
+                  <property name="maximum">
+                   <double>1.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.010000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                </layout>
                </widget>
               </item>
              </layout>
