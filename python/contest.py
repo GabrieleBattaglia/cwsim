@@ -26,8 +26,6 @@ from dxstation import DxStation
 from mystation import MyStation
 from dxoper import Os
 import queue
-import wave
-import time
 import sys
 import os
 import errno
@@ -137,7 +135,7 @@ class Contest():
    def bandwidth(self,bandwidth):
       self._bandwidth = np.max([np.min([round(bandwidth/50)*50,600]),100])
       navg = int(np.rint(0.7*self._rate/self._bandwidth))
-      self._fgain = np.sqrt(500/self._bandwidth);
+      self._fgain = np.sqrt(500/self._bandwidth)
       self._m1 = movavg(self._bufsize,navg,dtype=np.complex128)
       self._m2 = movavg(self._bufsize,navg,dtype=np.complex128)
       self._m3 = movavg(self._bufsize,navg,dtype=np.complex128)
@@ -231,7 +229,7 @@ class Contest():
             if (self.qsy and isinstance(s,DxStation) and
                s.oper.state != Os.Done and s.called):
                self.q.put(s.myCall)
-               if not (self.me.app is None):
+               if self.me.app is not None:
                   self.me.app.qsy()
             self.stations.remove(s)
          elif s.state == StationState.Sending:
@@ -271,7 +269,7 @@ class Contest():
          if isinstance(s,DxStation):
             if (s.oper.state == Os.Done):
                self.q.put(s.dataToLastQso())
-               if not (self.me.app is None):
+               if self.me.app is not None:
                   self.me.app.lastQso()
 #               (trueCall, trueRst, trueNr) = s.dataToLastQso()
 #               print("contest Correct Info ",trueCall,trueRst,trueNr)

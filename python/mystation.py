@@ -71,7 +71,7 @@ class MyStation(station.Station):
          self._pieces.pop(0)
          if len(self._pieces) > 0:
             self.sendNextPiece()
-            if not (self.app is None):
+            if self.app is not None:
                self.app.advance()
       return buf
 

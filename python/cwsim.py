@@ -16,15 +16,10 @@
 # See https://www.gnu.org/licenses/ for GPL licensing information.
 #
 import os
-try:
-   from PyQt6 import QtCore, QtGui, QtWidgets
-   from PyQt6.QtWidgets import QApplication, QTableWidgetItem
-   from PyQt6.QtGui import QShortcut
-   from PyQt6.uic import compileUi
-except ImportError:
-   from PyQt5 import QtCore, QtGui, QtWidgets
-   from PyQt5.QtWidgets import QApplication, QTableWidgetItem, QShortcut
-   from PyQt5.uic import compileUi
+from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import QApplication, QTableWidgetItem
+from PyQt6.QtGui import QShortcut
+from PyQt6.uic import compileUi
 
 try:
    uifilename = os.path.join(os.path.dirname(__file__),"cwsimgui.ui")
