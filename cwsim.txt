@@ -1,19 +1,22 @@
-IQ4FJ Report cwsim (DX Expedition) 27/03/2026 10:36:52
-Durata 00:10:00
-Durata (QSO) 27
-Velocità CW 32 WPM
+IQ4PG Report cwsim (DX Expedition) 01/04/2026 20:54:34
+Durata 00:13:18
+Durata (QSO) 23
+Velocità CW 26 WPM
 Condizioni Difficoltà 
-Attività 8
-Durata 10
-Punti totali 27
-Prefissi totali 25
-Punteggio totale 675
-Punti verificati 24
-Prefissi verificati 23
-Punteggio verificato 552
-Percentuale d'errore 11.1
+Attività 14
+Durata 14
+Punti totali 23
+Prefissi totali 21
+Punteggio totale 483
+Punti verificati 19
+Prefissi verificati 18
+Punteggio verificato 342
+Percentuale d'errore 17.4
 QSO per ora, suddiviso in intervalli da 5 minuti
-0-4   156
-5-9   168
+0-4   48
+5-9   144
+10-14   84
 Nominativi copiati male
-HA1TU AI2N IV3UIW
+R30 R30RL JH2JCQ
+Progressivi copiati male
+K2DS copiato 599 era RST 589
