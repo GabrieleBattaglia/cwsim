@@ -1,93 +1,22 @@
-VU2BK Report cwsim (DX Expedition) 08/04/2026 11:51:46
-Durata 00:15:00
-Durata (QSO) 44
-Velocità CW 28 WPM
+SV4VV/A Report cwsim (DX Expedition) 13/04/2026 11:53:00
+Durata 00:14:40
+Durata (QSO) 45
+Velocità CW 30 WPM
 Condizioni QSY Difficoltà 
 Attività 14
 Durata 15
-Punti totali 44
-Prefissi totali 42
-Punteggio totale 1848
-Punti verificati 41
-Prefissi verificati 39
-Punteggio verificato 1599
-Percentuale d'errore 6.8
+Punti totali 45
+Prefissi totali 44
+Punteggio totale 1980
+Punti verificati 43
+Prefissi verificati 42
+Punteggio verificato 1806
+Percentuale d'errore 4.4
 QSO per ora, suddiviso in intervalli da 5 minuti
 0-4   156
-5-9   168
-10-14   204
-Progressivi copiati male
-SP3MKS copiato 599 era RST 589
-K9AWM copiato 599 era RST 559
-R2ASY copiato 599 era RST 579
-Stazioni che hanno abbandonato senza terminare il QSO
-N1XQX YC0UI W9CSA BG8KST K3JSJ
-
-P55S Report cwsim (Contest) 09/04/2026 10:21:47
-Durata 00:00:24
-Durata (QSO) 1
-Velocità CW 30 WPM
-Condizioni QSY Difficoltà 
-Attività 8
-Durata 15
-Punti totali 1
-Prefissi totali 1
-Punteggio totale 1
-Punti verificati 1
-Prefissi verificati 1
-Punteggio verificato 1
-Percentuale d'errore 0.0
-QSO per ora, suddiviso in intervalli da 5 minuti
-0-4   12
-5-9   0
-10-14   0
-
-P55S Report cwsim (DX Expedition) 09/04/2026 10:22:46
-Durata 00:00:39
-Durata (QSO) 1
-Velocità CW 30 WPM
-Condizioni QSY Difficoltà 
-Attività 8
-Durata 15
-Punti totali 1
-Prefissi totali 1
-Punteggio totale 1
-Punti verificati 1
-Prefissi verificati 1
-Punteggio verificato 1
-Percentuale d'errore 0.0
-QSO per ora, suddiviso in intervalli da 5 minuti
-0-4   12
-5-9   0
-10-14   0
-Stazioni che hanno abbandonato senza terminare il QSO
-R5FY
-
-P55S Report cwsim (DX Expedition) 09/04/2026 10:38:19
-Durata 00:15:00
-Durata (QSO) 48
-Velocità CW 32 WPM
-Condizioni QSY Difficoltà 
-Attività 8
-Durata 15
-Punti totali 49
-Prefissi totali 46
-Punteggio totale 2254
-Punti verificati 41
-Prefissi verificati 40
-Punteggio verificato 1640
-Percentuale d'errore 16.3
-QSO per ora, suddiviso in intervalli da 5 minuti
-0-4   204
 5-9   204
 10-14   180
 Nominativi copiati male
-W1/LU9ESN HB9TIS DC5CS
-Progressivi copiati male
-KI5EE copiato 599 era RST 569
-DJ2MX copiato 599 era RST 589
-LN3C copiato 599 era RST 579
-SN8J copiato 599 era RST 559
-VE3XN copiato 599 era RST 579
+JN1VFU K2QD
 Stazioni che hanno abbandonato senza terminare il QSO
-AA1SE JA1BWD K6TQ WB1ADY W6DMR EB7HQE
+N8HWV VE2CWI
