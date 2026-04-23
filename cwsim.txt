@@ -1,22 +1,23 @@
-SV4VV/A Report cwsim (DX Expedition) 13/04/2026 11:53:00
-Durata 00:14:40
-Durata (QSO) 45
+P55L Report cwsim (DX Expedition) 22/04/2026 15:37:21
+Durata 00:15:00
+Durata (QSO) 48
 Velocità CW 30 WPM
 Condizioni QSY Difficoltà 
 Attività 14
 Durata 15
-Punti totali 45
-Prefissi totali 44
-Punteggio totale 1980
-Punti verificati 43
-Prefissi verificati 42
-Punteggio verificato 1806
-Percentuale d'errore 4.4
+Punti totali 48
+Prefissi totali 43
+Punteggio totale 2064
+Punti verificati 44
+Prefissi verificati 40
+Punteggio verificato 1760
+Percentuale d'errore 8.3
 QSO per ora, suddiviso in intervalli da 5 minuti
-0-4   156
-5-9   204
-10-14   180
+0-4   192
+5-9   180
+10-14   204
 Nominativi copiati male
-JN1VFU K2QD
+KL4OD PD7S W6PHQ HB9SS
 Stazioni che hanno abbandonato senza terminare il QSO
-N8HWV VE2CWI
+TM6Y ZS9Z KI5DDO Z68EE N4JR W9ILY PC9DB 4A2MAX
+SQ6PLD
