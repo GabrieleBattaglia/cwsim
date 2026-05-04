@@ -55,8 +55,8 @@ class ToUpperRegularExpressionValidator(QtGui.QRegularExpressionValidator):
       acceptable, string , pos =  super().validate(string,pos)
       return (acceptable, string.upper(), pos)
 
-VERSION = "1.0.2"
-RELEASE_DATE = "venerdì 27 marzo 2026"
+VERSION = "0.9.0 Beta"
+RELEASE_DATE = "May 4, 2026"
 
 class RunApp(QtWidgets.QMainWindow,cwsimgui.Ui_CwsimMainWindow):
 
