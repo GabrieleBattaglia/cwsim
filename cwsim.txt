@@ -1,22 +1,22 @@
-P55L Report cwsim (DX Expedition) 18/05/2026 17:46:23
-Durata 00:10:30
-Durata (QSO) 35
+P55L Report cwsim (DX Expedition) 27/05/2026 12:47:27
+Durata 00:12:45
+Durata (QSO) 37
 Velocità CW 32 WPM
 Condizioni QSY Difficoltà 
 Attività 14
 Durata 15
 Punti totali 37
-Prefissi totali 33
-Punteggio totale 1221
-Punti verificati 30
-Prefissi verificati 28
-Punteggio verificato 840
-Percentuale d'errore 18.9
+Prefissi totali 35
+Punteggio totale 1295
+Punti verificati 34
+Prefissi verificati 32
+Punteggio verificato 1088
+Percentuale d'errore 8.1
 QSO per ora, suddiviso in intervalli da 5 minuti
-0-4   252
+0-4   156
 5-9   180
-10-14   12
+10-14   108
 Nominativi copiati male
-DL2DCK K9PY/6 R4VAL SU2WYX YD3BFD CQ8Y PY1KNZ
+DK0PJ F6KKS DL2FDR
 Stazioni che hanno abbandonato senza terminare il QSO
-IV3RYX
+UA3RBP DG0AM WB8ASI YD1CAS N6NCW DM4G
