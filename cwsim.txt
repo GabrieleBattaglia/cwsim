@@ -20,3 +20,26 @@ Nominativi copiati male
 DK0PJ F6KKS DL2FDR
 Stazioni che hanno abbandonato senza terminare il QSO
 UA3RBP DG0AM WB8ASI YD1CAS N6NCW DM4G
+
+P55S Report cwsim (DX Expedition) 28/05/2026 12:14:20
+Durata 00:02:51
+Durata (QSO) 9
+Velocità CW 32 WPM
+Condizioni QSY Difficoltà 
+Attività 8
+Durata 15
+Punti totali 10
+Prefissi totali 9
+Punteggio totale 90
+Punti verificati 8
+Prefissi verificati 8
+Punteggio verificato 64
+Percentuale d'errore 20.0
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   120
+5-9   0
+10-14   0
+Nominativi copiati male
+PY4OM AQ6ZEZ
+Stazioni che hanno abbandonato senza terminare il QSO
+UX8IX SQ6MIZ
