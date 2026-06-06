@@ -1,45 +1,22 @@
-P55L Report cwsim (DX Expedition) 27/05/2026 12:47:27
-Durata 00:12:45
-Durata (QSO) 37
+P55L Report cwsim (DX Expedition) 04/06/2026 17:34:09
+Durata 00:15:00
+Durata (QSO) 49
 Velocità CW 32 WPM
 Condizioni QSY Difficoltà 
 Attività 14
 Durata 15
-Punti totali 37
-Prefissi totali 35
-Punteggio totale 1295
-Punti verificati 34
-Prefissi verificati 32
-Punteggio verificato 1088
-Percentuale d'errore 8.1
+Punti totali 50
+Prefissi totali 46
+Punteggio totale 2300
+Punti verificati 42
+Prefissi verificati 39
+Punteggio verificato 1638
+Percentuale d'errore 16.0
 QSO per ora, suddiviso in intervalli da 5 minuti
-0-4   156
-5-9   180
-10-14   108
+0-4   216
+5-9   264
+10-14   120
 Nominativi copiati male
-DK0PJ F6KKS DL2FDR
+DL5ZD N5US G9N JH4OYB W4SI PU2PND PD0KS BD8AGF
 Stazioni che hanno abbandonato senza terminare il QSO
-UA3RBP DG0AM WB8ASI YD1CAS N6NCW DM4G
-
-P55S Report cwsim (DX Expedition) 28/05/2026 12:14:20
-Durata 00:02:51
-Durata (QSO) 9
-Velocità CW 32 WPM
-Condizioni QSY Difficoltà 
-Attività 8
-Durata 15
-Punti totali 10
-Prefissi totali 9
-Punteggio totale 90
-Punti verificati 8
-Prefissi verificati 8
-Punteggio verificato 64
-Percentuale d'errore 20.0
-QSO per ora, suddiviso in intervalli da 5 minuti
-0-4   120
-5-9   0
-10-14   0
-Nominativi copiati male
-PY4OM AQ6ZEZ
-Stazioni che hanno abbandonato senza terminare il QSO
-UX8IX SQ6MIZ
+S53SL SN8V YB1HDF TM23RUGB DG3BZ WA5SNL
