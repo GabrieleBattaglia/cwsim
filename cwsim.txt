@@ -20,3 +20,28 @@ Nominativi copiati male
 DS4TGL
 Stazioni che hanno abbandonato senza terminare il QSO
 BI4TGL
+
+P55S Report cwsim (DX Expedition) 10/09/2026 15:55:58
+Durata 00:06:41
+Durata (QSO) 23
+Velocità CW 32 WPM
+Condizioni QSY Difficoltà 
+Attività 8
+Durata 15
+Punti totali 23
+Prefissi totali 21
+Punteggio totale 483
+Punti verificati 19
+Prefissi verificati 18
+Punteggio verificato 342
+Percentuale d'errore 17.4
+QSO per ora, suddiviso in intervalli da 5 minuti
+0-4   204
+5-9   72
+10-14   0
+Nominativi copiati male
+JO JH7VHN NK2KC
+Progressivi copiati male
+VE3NE copiato 599 era RST 589
+Stazioni che hanno abbandonato senza terminare il QSO
+EC4AT LU7YZ VA3CTA
